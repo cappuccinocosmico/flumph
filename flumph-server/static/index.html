@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Flumph</title>
+</head>
+<body>
+    <h1>Flumph</h1>
+    <video id="video" autoplay muted playsinline></video>
+    <script>
+        const video = document.getElementById('video');
+        const ws = new WebSocket(`ws://${window.location.host}/stream/0`);
+        ws.binaryType = 'arraybuffer';
+        ws.onmessage = (event) => {
+            // TODO: This is where we would handle the incoming AV1 frames
+            // and feed them to the video element using Media Source Extensions.
+            // For now, we'll just log the data.
+            console.log('Received data:', event.data);
+        };
+    </script>
+</body>
+</html>
