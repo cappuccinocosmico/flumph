@@ -20,8 +20,9 @@ In the beginning I want the framework to support multiple kinds of network conne
 As for hardware targets I want to support now
 - Sensor Nodes: An android phone that runs the software as an app and has access to sensors through the usb-c port
 - Compute Nodes: A regular desktop linux app 
-- (LATER IMPLEMENTATION): A framework to allow easy coding of an ESP-32 to interface to other sensor nodes on the network.
+- (LATER IMPLEMENTATION): A framework to allow easy coding of an ESP-32 to interface to other sensor nodes on the network. However, I would at least like all our technology decisions to at least be compatible with running on embedded hardware.
 
+This does mean that it probably makes sense to do everything in terms of a rust monolith. Expecially since it has a solution like Dioxus which can handle mobile and desktop apps.
 
 But for starters I think its a really good idea to just limit the scope as much as possible and think about how to do the following
 
@@ -49,8 +50,10 @@ This mainly needs to store the timeseries data that comes off the sensor nodes. 
 
 Which luckily just pushes all the difficulty on to how to handle the distributed metadata solution.
 
+I think for now the simplest approach is to just not worry about encryption and just store the blobs using hashes on local devices.
+
 2) How to handle the distributed metadata and control system.
 
-I dont have a lot of good ideas on how to do this. There are some cool CRDT's that seem to show some promise. Specifically looking at the WIP prototype https://www.inkandswitch.com/keyhive/notebook/ . It looks super powerful and flexible enough to power this application. Its in the super early beta phase, but its such a good match I am considering using it even though it would likely be a horrible idea.
+I dont have a lot of good ideas on how to do this. There are some cool CRDT's that seem to show some promise. Specifically looking at the WIP prototype https://www.inkandswitch.com/keyhive/notebook/ . It looks super powerful and flexible enough to power this application. Its in the super early beta phase, but its such a good match I am considering using it even though it is in an alpha phase and might end up being a horrible idea.
 
 Dont have a lot of good solutions for this yet. What do you think??
