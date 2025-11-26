@@ -41,7 +41,16 @@ But for starters I think its a really good idea to just limit the scope as much 
 The big remaining questions I am thinking about is how to handle 
 
 1) the distributed file/data storage system.
-I have looked at a lot of the s
 
-2) How to handle the distributed metadata and control system
+This mainly needs to store the timeseries data that comes off the sensor nodes. Which to keep things simple could be something like:
+1. As the hour begins all of the sensor data is stored in memory.
+2. As the hour ends, all the sensor data from all the different devices is stored in a blob, then compressed, and stored in an e2e way on a distributed file system. .
+3. When the compute node comes to connect to the rest of the data, it will read the metadata info and determines how much time has ellapsed and what data it needs to download that it is currently missing. Then queries the file system to get them.
 
+Which luckily just pushes all the difficulty on to how to handle the distributed metadata solution.
+
+2) How to handle the distributed metadata and control system.
+
+I dont have a lot of good ideas on how to do this. There are some cool CRDT's that seem to show some promise. Specifically looking at the WIP prototype https://www.inkandswitch.com/keyhive/notebook/ . It looks super powerful and flexible enough to power this application. Its in the super early beta phase, but its such a good match I am considering using it even though it would likely be a horrible idea.
+
+Dont have a lot of good solutions for this yet. What do you think??
